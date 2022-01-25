@@ -8,7 +8,7 @@ class Project(models.Model):
     description = models.TextField(null=True, blank=True)
     demo_link = models.CharField(max_length=2000, null=True, blank=True)
     source_link = models.CharField(max_length=2000, null=True, blank=True)
-    # MANy TO MANY RELATIONSHIP
+    # MANY TO MANY RELATIONSHIP
     tags = models.ManyToManyField('Tag', blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
     vote_ration = models.IntegerField(default=0, null=True, blank=True)
@@ -19,10 +19,14 @@ class Project(models.Model):
 
     
     def __str__(self):
+        """
+        RETURNS PROJECT TITLE (NAME) IN THE ADMIN PANEL.
+        """
         return self.title
 
 
 class Review(models.Model):
+    # DROPDOWN MENU
     VOTE_TYPE = (
         ('up', 'Up Vote'),
         ('down', 'Down Vote'),
