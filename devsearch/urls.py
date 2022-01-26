@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# TWO IMPORT BELOW HELP CREATE URLs FOR STATIC FILES
+from django.conf import settings
+from django.conf.urls.static import static
 
 """
     SEPERATE URLS INTO MULTIPLE MODULES BASED ON THE APP
@@ -23,3 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('projects.urls')),
 ]
+
+# CREATES URls FOR STATIC FILES
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
