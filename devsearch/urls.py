@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
+"""
+    SEPERATE URLS INTO MULTIPLE MODULES BASED ON THE APP
+"""
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('projects.urls')),

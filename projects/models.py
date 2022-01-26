@@ -2,6 +2,9 @@ from django.db import models
 import uuid
 
 
+
+
+
 class Project(models.Model):
     title = models.CharField(max_length=200)
     # null = True (Can be blank in DB) black=True (Allwed to submit a form with this value empty)

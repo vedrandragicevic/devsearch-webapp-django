@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 """
-WHEN CREATING A NEW APP USING 'python manage.py startapp <APP_NAME>', ADD IT TO THE INSTALLED_APPS LIST
+    WHEN CREATING A NEW APP USING 'python manage.py startapp <APP_NAME>', ADD IT TO THE INSTALLED_APPS LIST
 """
 
 INSTALLED_APPS = [
@@ -56,6 +56,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'devsearch.urls'
 
+""" 
+    WHEN CREATING A NEW TEMPLATE, ADD IT TO TEMPLATES['DIRS'] LIST
+"""
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

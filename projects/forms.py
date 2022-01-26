@@ -7,4 +7,4 @@ class ProjectForm(ModelForm):
     class Meta:
         # CREATES A FORM BASED ON CLASS PROJECT FROM models.py
         model = Project
-        fields = '__all__'
+        fields = ['title', 'description', 'demo_link', 'source_link', 'tags']
