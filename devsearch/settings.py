@@ -24,8 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h71w4nes3kmax8lsmbg_pji=7++4ohg9g=ts#v=2y1m13q#4tw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# CHANGE DEBUG = False BEFORE DEPLOYING TO PROD
 DEBUG = True
 
+
+# HOSTS THAT ARE ALLOWED TO CONNECT TO THIS WEBSITE
 ALLOWED_HOSTS = []
 
 
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-MEADIA_URL = '/images/'
+MEADIA_URL = ''
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
@@ -134,6 +138,8 @@ STATICFILES_DIRS = [
 
 # TELL DJANGO WHERE TO UPLOAD STATIC FILES
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+# DEFINES WHERE STATIC FILES IN PRODUCTION ARE GONNA BE
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
