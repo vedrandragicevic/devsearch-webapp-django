@@ -18,4 +18,3 @@ class ProjectForm(ModelForm):
         for name, field in self.base_fields.items():
                 
             field.widget.attrs.update({'class':'input'})
-            print(field.widget.attrs)
