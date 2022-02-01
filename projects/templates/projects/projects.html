@@ -39,7 +39,7 @@
                   <p class="project--rating">
                       <!-- pluralize function: Returns a plural suffix if the value is not 1. By default, 's' is used as the suffix -->
                     <span style="font-weight: bold;">{{project.vote_ration}}</span> Positive
-                    Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize}})
+                    Feedback ({{project.vote_total}}) Vote{{project.vote_total|pluralize}}
                   </p>
                   <div class="project__tags">
                       {% for tag in project.tags.all %}
