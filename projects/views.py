@@ -3,11 +3,13 @@ from django.http import HttpResponse
 from .models import Project, Tag
 from .forms import ProjectForm
 from django.contrib.auth.decorators import login_required
+from .utils import searchProjects
 
 
 def projects(request):
-    projects = Project.objects.all()
-    context = {"projects": projects}
+    projects, search_query = searchProjects(request)
+
+    context = {"projects": projects, 'search_query': search_query}
     return render(request, 'projects/projects.html', context)
 
 def project(request, pk):
@@ -18,13 +20,18 @@ def project(request, pk):
 
 @login_required(login_url="login")
 def createProject(request):
+    profile = request.user.profile
     form = ProjectForm()
     if request.method == 'POST':      
         # print(request.POST) -> PRINTS DICT IN TERMINAL
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
+            # RETURNS INSTANCE OF THAT PROJECT
+            project = form.save(commit=False)
+            project.owner = profile
+            project.save()
             form.save()
-            return redirect('projects')
+            return redirect('account')
 
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
@@ -32,7 +39,9 @@ def createProject(request):
 
 @login_required(login_url="login")
 def updateProject(request, pk):
-    project = Project.objects.get(id=pk)
+    # ONLY THE OWNER CAN UPDATE THAT PROJECT
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':      
@@ -40,7 +49,7 @@ def updateProject(request, pk):
         form = ProjectForm(request.POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
-            return redirect('projects')
+            return redirect('account')
 
     context = {'form': form}
     return render(request, "projects/project_form.html", context)
@@ -48,9 +57,10 @@ def updateProject(request, pk):
 
 @login_required(login_url="login")
 def deleteProject(request, pk):
-    project = Project.objects.get(id=pk)
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
     if request.method == 'POST':
         project.delete()
         return redirect('projects')
     context = {'object': project}
-    return render(request, 'projects/delete_template.html', context)
+    return render(request, 'delete_template.html', context)
