@@ -31,6 +31,10 @@ class Project(models.Model):
         RETURNS PROJECT TITLE (NAME) IN THE ADMIN PANEL.
         """
         return self.title
+    
+    class Meta:
+        # FILTER NEW FIRST
+        ordering = ['-created']
 
 
 class Review(models.Model):

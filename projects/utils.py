@@ -1,9 +1,41 @@
 from .models import Project, Tag
 from django.db.models import Q
 # Q object encapsulates a SQL expression in a Python object that can be used in database-related operations
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
+
+def paginateProjects(request, projects, results):
+    # Pagination implementation with custom range
+    page = request.GET.get('page')
+    results = 2
+    paginator = Paginator(projects, results)
+
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        projects = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        projects = paginator.page(page)
+
+    # Solving the problem that occurs if we have for example 100 buttons on a single page
+    leftIndex = (int(page)-4)
+
+    if leftIndex < 1:
+        leftIndex = 1
+    
+    rightIndex = (int(page) + 5)
+
+    if rightIndex > paginator.num_pages:
+        rightIndex = paginator.num_pages + 1
+
+    custom_range = range(leftIndex, rightIndex)
+    return custom_range, projects
 
 
 def searchProjects(request):
+    # Search functionality implemententation
     search_query = ""
 
     if request.GET.get('search_query'):
