@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm, profileForm, SkillForm
 from django.db.models import Q
-from .utils import searchProfiles
+from .utils import searchProfiles, paginateProfiles
 
 
 def loginUser(request):
@@ -73,10 +73,12 @@ def registerUser(request):
 def profiles(request):
     # CALLING FUNCTION FROM UTILS.PY
     profiles, search_query = searchProfiles(request)
+    custom_range, profiles = paginateProfiles(request, profiles, 6)
 
     context = {
         'profiles': profiles,
-        'search_query': search_query
+        'search_query': search_query,
+        'custom_range': custom_range
     }
     return render(request, 'users/profiles.html', context)
 
@@ -89,9 +91,10 @@ def userProfile(request, pk):
     topSkills = profile.skill_set.exclude(description="")
     # GIVE ME ALL THE VALUES THAT CONTAIN description=""
     otherSkills = profile.skill_set.filter(description="")
-    context = {'profile': profile,
-    'topSkills': topSkills,
-    'otherSkills': otherSkills
+    context = {
+        'profile': profile,
+        'topSkills': topSkills,
+        'otherSkills': otherSkills
     }
     return render(request, 'users/user-profile.html', context)
 

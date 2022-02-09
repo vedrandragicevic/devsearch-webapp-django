@@ -15,7 +15,7 @@
           </div>
   
           <div class="hero-section__search">
-            <form class="form" action="{% url 'profiles' %}" method="get">
+            <form id="searchForm" class="form" action="{% url 'profiles' %}" method="get">
               <div class="form__field">
                 <label for="formInput#search">Search Developers </label>
                 <!-- name="search_query" is used in profiles view -->
@@ -70,7 +70,8 @@
         </div>
       </section>
   
-      
+      {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
+
     </main>
   </body>
   
