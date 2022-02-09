@@ -35,6 +35,10 @@ class Project(models.Model):
     class Meta:
         # FILTER NEW FIRST
         ordering = ['-created']
+    
+    @property
+    def getVoteCount(self):
+        reviews = self.review_set.all()
 
 
 class Review(models.Model):
@@ -43,13 +47,22 @@ class Review(models.Model):
         ('up', 'Up Vote'),
         ('down', 'Down Vote'),
     )
-    # owner = 
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     body =  models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices=VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     # Django creates automatically INT IDs
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    class Meta:
+        """
+        Model Meta is basically the inner class of your model class.
+        Model Meta is basically used to change the behavior of your model fields like changing order options,
+        verbose_name and lot of other options. It's completely optional to add Meta class in your model.
+        """
+        # EACH OWNER CAN ONLY LEAVE ONE REVIEW PER PROJECT
+        unique_together = [['owner', 'project']]
 
 
     def __str__(self):
