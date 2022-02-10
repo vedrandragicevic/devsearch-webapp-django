@@ -32,13 +32,30 @@ class Project(models.Model):
         """
         return self.title
     
+
     class Meta:
-        # FILTER NEW FIRST
-        ordering = ['-created']
+        # The one with more votes will rank first
+        ordering = ['-vote_ration', '-vote_total', 'title']
+
+
+    @property
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+
     
     @property
     def getVoteCount(self):
+        # Getting all reviews
         reviews = self.review_set.all()
+        upVotes = reviews.filter(value='up').count()
+        # How many items are in the queryset
+        totalVotes = reviews.count()
+
+        ratio = (upVotes/ totalVotes) * 100
+        self.vote_total = totalVotes
+        self.vote_ration = ratio
+        self.save()
 
 
 class Review(models.Model):
