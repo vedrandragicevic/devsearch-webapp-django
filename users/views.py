@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CustomUserCreationForm, profileForm, SkillForm
+from .forms import CustomUserCreationForm, profileForm, SkillForm, MessageForm
 from django.db.models import Q
 from .utils import searchProfiles, paginateProfiles
 
@@ -102,6 +102,18 @@ def userProfile(request, pk):
 
 @login_required(login_url='login')
 def userAccount(request):
+    """
+        Suppose you have a model Car and a model Wheel. Wheel has a foreign key relationship with Car as follows:
+            class Car(models.Model):
+                pass
+
+            class Wheel(models.Model):
+                car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+        Let's say w is an instance of Wheel, and c is an instance of Car:
+            w.car # returns the related Car object to w
+            c.wheel_set.all() # returns all Wheel objects related to c
+    """
     profile = request.user.profile
 
     skills = profile.skill_set.all()
@@ -182,6 +194,7 @@ def inbox(request):
     # messages is related name in the model
     messageRequest = profile.messages.all()
     unreadCount = messageRequest.filter(is_read=False).count()
+
     context = {'messageRequest': messageRequest, 'unreadCount': unreadCount}
     return render(request, 'users/inbox.html', context)
 
@@ -195,11 +208,36 @@ def viewMessage(request, pk):
     if message.is_read == False:
         message.is_read = True
         message.save()
+
     context = {'message': message}
     return render(request, 'users/message.html', context)
 
 
 def createMessage(request, pk):
     recepient = Profile.objects.get(id=pk)
-    context = {'recepient': recepient}
+    form = MessageForm()
+
+    try:
+        sender = request.user.profile
+    except:
+        sender = None
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = sender
+            message.recepient = recepient
+
+            if sender:
+                message.name = sender.name
+                message.email = sender.email
+            message.save()
+            messages.success(request, 'Your message was successfully sent!')
+            # When you send somebody a message, you'll be redirected to their account
+            return redirect('user-profile', pk=recepient.id)
+    
+    context = {'recepient': recepient, 'form': form}
     return render(request, 'users/message_form.html', context)
+
+
