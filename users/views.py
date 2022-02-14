@@ -197,3 +197,9 @@ def viewMessage(request, pk):
         message.save()
     context = {'message': message}
     return render(request, 'users/message.html', context)
+
+
+def createMessage(request, pk):
+    recepient = Profile.objects.get(id=pk)
+    context = {'recepient': recepient}
+    return render(request, 'users/message_form.html', context)
