@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .serializers import Project, ProjectSerializer
-from projects.models import Project, Tag
+from projects.models import Project, Tag, Review
 from users.models import Profile
 
 
@@ -46,5 +46,32 @@ def getProjects(request):
 def getProject(request, pk):
     project = Project.objects.get(id=pk)
     # Takes query set and transforms it into JSON
+    serializer = ProjectSerializer(project, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def projectVote(request, pk):
+    project = Project.objects.get(id=pk)
+    # Get user from token
+    user = request.user.profile
+    data = request.data
+
+    """
+    get_or_create(defaults=None, **kwargs)
+        A convenience method for looking up an object with the given kwargs (may be empty if your model has defaults for all fields), creating one if necessary.
+        Returns a tuple of (object, created), where object is the retrieved or created object and created is a boolean specifying whether a new object was created.
+        This is meant to prevent duplicate objects from being created when requests are made in parallel, and as a shortcut to boilerplatish code
+    """
+    review, created = Review.objects.get_or_create(
+        owner=user,
+        project=project 
+    )
+    review.value = data['value']
+    review.save()
+    project.getVoteCount
+
+    # many = False to get only one project
     serializer = ProjectSerializer(project, many=False)
     return Response(serializer.data)
