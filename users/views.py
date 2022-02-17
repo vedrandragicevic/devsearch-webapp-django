@@ -130,7 +130,7 @@ def editAccount(request):
     form = profileForm(instance=profile)
 
     if request.method == 'POST':
-        form = profileForm(request.POST, request.FILE, instance=profile)
+        form = profileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
 

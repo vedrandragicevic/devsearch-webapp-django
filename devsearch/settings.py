@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',
     'users.apps.UsersConfig',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 
@@ -96,6 +97,7 @@ SIMPLE_JWT = {
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -172,6 +174,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# Allow all domains
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Configuring email backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
