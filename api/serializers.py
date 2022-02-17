@@ -27,13 +27,14 @@ class ProjectSerializer(serializers.ModelSerializer):
     owner = ProfileSerializer(many=False)
     tags = TagSerializer(many=True)
 
+    # Adds attribute to JSON object
     reviews = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
         fields = '__all__'
 
-    # Needs to start with get_
+    # Needs to start with 'get_'
     def get_reviews(self, obj):
         reviews = obj.review_set.all()
         serializer = ReviewSerializer(reviews, many=True)

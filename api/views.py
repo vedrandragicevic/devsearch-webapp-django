@@ -1,4 +1,5 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .serializers import Project, ProjectSerializer
 from projects.models import Project, Tag
@@ -31,7 +32,9 @@ def getRoutes(request):
     return Response(routes)
 
 
+# Permission classes decorator limits user to see projects only if he's authenticated
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getProjects(request):
     projects = Project.objects.all()
     # Takes query set and transforms it into JSON
