@@ -17,6 +17,14 @@ form.addEventListener('submit', (e) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Data: ', data)
+        console.log('Data: ', data.access)
+        if (data.access){
+            localStorage.setItem('token', data.access)
+            // Redirect the user to projects
+            window.location = 'file:///E:/Users/Vedran/VS%20Code/django_project/devsearch/frontend/projects-list.html'
+        }
+        else{
+            alert('Username or password did not work!')
+        }
     })
 })

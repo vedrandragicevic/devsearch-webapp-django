@@ -1,17 +1,34 @@
+let loginBtn = document.getElementById('login-btn')
+let logoutBtn = document.getElementById('logout-btn')
+
+let token = localStorage.getItem('token')
+
+if (token){
+    loginBtn.remove
+}
+else{
+    logoutBtn.remove
+}
+
+logoutBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    localStorage.removeItem('token')
+    window.location = 'file:///E:/Users/Vedran/VS%20Code/django_project/devsearch/frontend/login.html'
+})
 
 let projectsUrl = 'http://127.0.0.1:8000/api/projects/'
 
 let getProjects = () => {
+
     fetch(projectsUrl, {
-        headers: {
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ1Mjc3NjMzLCJpYXQiOjE2NDUxOTEyMzMsImp0aSI6ImZlMDRiZDdhMzc2YTRjOTM5NzBhOGZlNDYzYWU0Mzg2IiwidXNlcl9pZCI6MX0.EiOW2dYGS7nKpaMYNvXsARYfSWnekngMnmx5-H9ZaoM'
-        }
+        Authorization: `Bearer ` + token
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        buildProjects(data)
-    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            buildProjects(data)
+        })
+
 }
 
 
