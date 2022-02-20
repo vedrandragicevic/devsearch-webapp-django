@@ -6,7 +6,7 @@ from users.models import Profile
 
 
 class Project(models.Model):
-    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     # null = True (Can be blank in DB) black=True (Allwed to submit a form with this value empty)
     description = models.TextField(null=True, blank=True)
@@ -36,6 +36,16 @@ class Project(models.Model):
     class Meta:
         # The one with more votes will rank first
         ordering = ['-vote_ration', '-vote_total', 'title']
+
+
+    # imageURL property can be accessed as an attribute in HTML tags
+    @property
+    def imageURL(self):
+        try:
+            url = self.featured_image.url
+        except:
+            url = ''
+        return url
 
 
     @property

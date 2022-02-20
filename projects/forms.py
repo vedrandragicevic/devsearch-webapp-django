@@ -7,7 +7,7 @@ class ProjectForm(ModelForm):
     class Meta:
         # CREATES A FORM BASED ON CLASS PROJECT FROM models.py
         model = Project
-        fields = ['title', 'featured_image','description', 'demo_link', 'source_link', 'tags']
+        fields = ['title', 'featured_image','description', 'demo_link', 'source_link']
         widgets = {
             'tags': forms.CheckboxSelectMultiple()
         }
