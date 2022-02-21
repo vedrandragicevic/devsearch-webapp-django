@@ -53,6 +53,9 @@ def getProject(request, pk):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def projectVote(request, pk):
+    """
+        Post request endpoint
+    """
     project = Project.objects.get(id=pk)
     # Get user from token
     user = request.user.profile
@@ -75,3 +78,16 @@ def projectVote(request, pk):
     # many = False to get only one project
     serializer = ProjectSerializer(project, many=False)
     return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def removeTag(request):
+    tagId = request.data['tag']
+    projectId = request.data['project']
+
+    project = Project.objects.get(id=projectId)
+    tag = Tag.objects.get(id=tagId)
+
+    project.tags.remove(tag)
+
+    return Response('Tag was deleted!')
