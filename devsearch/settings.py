@@ -34,7 +34,7 @@ DEBUG = True
 
 
 # HOSTS THAT ARE ALLOWED TO CONNECT TO THIS WEBSITE
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -210,7 +210,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-MEADIA_URL = ''
+MEDIA_URL = ''
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
@@ -236,3 +236,8 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_ACCESS_KEY_ID = os.getenv('S3_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY = os.getenv('S3_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+
+
+# If we're live, disable debugger
+if os.getcwd() == '/app':
+    DEBUG = False
