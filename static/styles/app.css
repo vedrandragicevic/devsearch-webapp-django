@@ -31,7 +31,7 @@ img {
 .header {
   position: sticky;
   z-index: 111;
-  background-color: var(--color-sub);
+  background-color: #020515;
   padding: 1.5rem 0;
 }
 
@@ -173,7 +173,9 @@ img {
   height: 40vh;
   display: flex;
   align-items: center;
-  background-color: var(--color-sub);
+  background-image: url("../images/blue_dark.jpg");
+  background-repeat: no-repeat;
+  background-size: cover
 }
 
 .hero-section__box {
@@ -486,7 +488,6 @@ img {
   Projects Page
 ========================*/
 .projects > .hero-section {
-  background: var(--color-sub-lighter);
   height: 30vh;
 }
 
@@ -495,7 +496,7 @@ img {
 }
 
 .projects .hero-section__box > h2 {
-  color: var(--color-sub);
+  color: white;
 }
 
 .projects .hero-section__box > h2 > span {
