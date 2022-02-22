@@ -21,3 +21,6 @@ Key elements of the course:
 </ul>
 <hr>
 Udemy course URL (https://www.udemy.com/course/python-and-django-for-beginners/).
+<hr>
+### Main Page
+![alt text](https://github.com/vedrandragicevic/django_project/blob/main/static/images/main_page.jpg?raw=true)
