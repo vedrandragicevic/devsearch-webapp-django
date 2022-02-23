@@ -16,7 +16,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
 
-        for name, field in self.base_fields.items():
+        for name, field in self.fields.items():
                 
             field.widget.attrs.update({'class':'input'})
 
@@ -30,7 +30,7 @@ class profileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(profileForm, self).__init__(*args, **kwargs)
 
-        for name, field in self.base_fields.items():
+        for name, field in self.fields.items():
                 
             field.widget.attrs.update({'class':'input'})
 
@@ -44,7 +44,7 @@ class SkillForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(SkillForm, self).__init__(*args, **kwargs)
 
-        for name, field in self.base_fields.items():
+        for name, field in self.fields.items():
                 
             field.widget.attrs.update({'class':'input'})
 
@@ -57,6 +57,6 @@ class MessageForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(MessageForm, self).__init__(*args, **kwargs)
 
-        for name, field in self.base_fields.items():
+        for name, field in self.fields.items():
                 
             field.widget.attrs.update({'class':'input'})

@@ -13,11 +13,12 @@ class ProjectForm(ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(ProjectForm, self).__init__(*args, **kwargs)
-
-        for name, field in self.base_fields.items():
-                
-            field.widget.attrs.update({'class':'input'})
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'class':'input'})
+        self.fields['featured_image'].widget.attrs.update({'class':'input'})
+        self.fields['description'].widget.attrs.update({'class':'input'})
+        self.fields['demo_link'].widget.attrs.update({'class':'input'})
+        self.fields['source_link'].widget.attrs.update({'class':'input'})
 
     
 class ReviewForm(ModelForm):
@@ -33,8 +34,6 @@ class ReviewForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-
-        for name, field in self.base_fields.items():
-                
-            field.widget.attrs.update({'class':'input'})
+        self.fields['value'].widget.attrs.update({'class':'input'})
+        self.fields['body'].widget.attrs.update({'class':'input'})
        

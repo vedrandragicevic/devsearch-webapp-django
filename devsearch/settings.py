@@ -34,7 +34,7 @@ DEBUG = True
 
 
 # HOSTS THAT ARE ALLOWED TO CONNECT TO THIS WEBSITE
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['devsearchvex.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -238,6 +238,6 @@ AWS_SECRET_ACCESS_KEY = os.getenv('S3_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
 
 
-# If we're live, disable debugger
+# If we're live, disable debugger (cwd - current working directory)
 if os.getcwd() == '/app':
     DEBUG = False

@@ -19,6 +19,7 @@ Key elements of the course:
     Write scripts for general productivity tasks Read and comprehend Python code Gain knowledge in regard to general programming concepts
     </li>
 </ul>
+<br>Web application has modified CSS and more features than the one the course.<br>
 <hr>
 Udemy course URL (https://www.udemy.com/course/python-and-django-for-beginners/).
 <hr>
