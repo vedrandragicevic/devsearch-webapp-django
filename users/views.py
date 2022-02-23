@@ -241,3 +241,12 @@ def createMessage(request, pk):
     return render(request, 'users/message_form.html', context)
 
 
+@login_required(login_url="login")
+def deleteUser(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        logout(request)
+        profile.delete()
+        return redirect('profiles')
+    context = {'object': profile}
+    return render(request, 'delete_template.html', context)
