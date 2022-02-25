@@ -48,6 +48,12 @@ def deleteUser(sender, instance, **kwargs):
         pass
 
 
+
+def delete_image_file(sender, instance, **kwargs):                          
+    if instance.profile_image != 'default_new.jpg':
+        instance.profile_image.delete(False)
+
 post_save.connect(createProfile, sender=User)
 post_save.connect(updateUser, sender=Profile)
 post_delete.connect(deleteUser, sender=Profile)
+post_delete.connect(delete_image_file, sender=Profile)
