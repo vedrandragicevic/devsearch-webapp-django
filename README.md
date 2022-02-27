@@ -16,18 +16,18 @@ Key elements of the course:
     Django Framework With Building Projects
     </li>
     <li>
-    Write scripts for general productivity tasks Read and comprehend Python code Gain knowledge in regard to general programming concepts
+    Write scripts for general productivity tasks and gain knowledge in regard to general programming concepts
     </li>
 </ul>
-<br>Web application has modified CSS and more features than the one in the course. Application was built using Django, Python, HTML, CSS and JS.<br>
+<br>Web application has modified **CSS** and more features than the one in the course. Application was built using **Django**, **Python**, **HTML**, **BOOTSTRAP** and **JS**.<br>
 <hr>
 Udemy course URL (https://www.udemy.com/course/python-and-django-for-beginners/).
 <hr>
 <h3>Main Page</hr>
 <br><br>
-<p><img src="static/images/main_page.jpg" style="max-width: 100%;"> </p>
+<p><img src="static/images/index_page.png" style="max-width: 100%;"> </p>
 <hr>
-<h3>Login Page</hr>
+<h3>Account Page</hr>
 <br><br>
-<p><img src="static/images/login_page.png" style="max-width: 100%;"> </p>
+<p><img src="static/images/account_page.png" style="max-width: 100%;"> </p>
 
