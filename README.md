@@ -1,5 +1,6 @@
 # Python Django Website Project
 A Python Django project based on the popular **Udemy** course '*Python And Django Framework For Beginners Complete Course*'.
+Deployed application URL: https://devsearchvex.herokuapp.com/
 <br>
 Key elements of the course:
 <ul> 
@@ -19,7 +20,8 @@ Key elements of the course:
     Write scripts for general productivity tasks and gain knowledge in regard to general programming concepts
     </li>
 </ul>
-<br>Web application has modified **CSS** and more features than the one in the course. Application was built using **Django**, **Python**, **HTML**, **BOOTSTRAP** and **JS**.<br>
+<br>Web application has modified CSS and more features than the one in the course. Application was built using Django, Python, HTML, BOOTSTRAP and JS.
+Application uses Postgres SQL database that is not included in this repo. Static files are hosted on AWS S3 buckets.<br>
 <hr>
 Udemy course URL (https://www.udemy.com/course/python-and-django-for-beginners/).
 <hr>
